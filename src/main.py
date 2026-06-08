@@ -33,7 +33,8 @@ def read_root():
 def login(login_data: LoginRequest, request: Request):
     username = login_data.username
     password = login_data.password
-    ip = request.client.host if request.client else "unknown"
+    forwarded_for = request.headers.get("X-Forwarded-For")
+    ip = forwarded_for.split(",")[0].strip() if forwarded_for else (request.client.host if request.client else "unknown")
     
     lock_key = f"lock:{username}"
     account_key = f"account:{username}"
