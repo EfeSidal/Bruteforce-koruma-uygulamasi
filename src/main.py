@@ -12,6 +12,7 @@ from src.counter import (
 )
 from src.delay_policy import apply_delay, should_lock
 from src.captcha import is_captcha_required, verify_captcha
+from src.alert import send_lock_alert, send_unlock_alert
 
 app = FastAPI()
 
@@ -74,6 +75,7 @@ def login(login_data: LoginRequest, request: Request):
         if should_lock(account_attempts):
             lock_account(lock_key, 900)  # 15 dakika = 900 saniye
             log_attempt(ip, username, account_attempts, "LOCKED")
+            send_lock_alert(username, ip, account_attempts)
             return {
                 "success": False, 
                 "attempt": account_attempts, 
@@ -115,5 +117,7 @@ def unlock_account(username: str):
     
     reset_attempts(account_key)
     reset_attempts(lock_key)  # reset_attempts redis_client.delete() yapıyor
+    
+    send_unlock_alert(username)
     
     return {"message": f"Hesap kilidi açıldı: {username}"}
