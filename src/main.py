@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from datetime import datetime
@@ -10,12 +11,14 @@ from src.counter import (
     reset_attempts
 )
 from src.delay_policy import apply_delay, should_lock
+from src.captcha import is_captcha_required, verify_captcha
 
 app = FastAPI()
 
 class LoginRequest(BaseModel):
     username: str
     password: str
+    captcha_token: Optional[str] = None
 
 def log_attempt(ip: str, username: str, attempt: int, status: str):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -41,6 +44,23 @@ def login(login_data: LoginRequest, request: Request):
         log_attempt(ip, username, attempt_count, "LOCKED")
         return {"success": False, "message": "Hesap kilitli. 15 dakika bekleyin."}
     
+    # 1.5 CAPTCHA kontrolü
+    attempt_count = get_attempt_count(account_key)
+    if is_captcha_required(attempt_count):
+        if not login_data.captcha_token:
+            return {
+                "success": False,
+                "captcha_required": True,
+                "message": "CAPTCHA doğrulaması gerekli."
+            }
+        
+        if not verify_captcha(login_data.captcha_token):
+            return {
+                "success": False,
+                "captcha_required": True,
+                "message": "Geçersiz CAPTCHA."
+            }
+
     # 2. Şifre doğrulama (Test için: "secret123")
     if password != "secret123":
         # Yanlış şifre durumu
