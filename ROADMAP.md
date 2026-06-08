@@ -1,15 +1,70 @@
-# ROADMAP
+# ROADMAP — [Your Project Title]
+# ROADMAP — [Proje Başlığınız]
 
-## Proje Aşamaları
+> Course / Ders: Secure Web Development (BGT208) · Istinye University
+> Instructor / Danışman: Keyvan Arasteh
 
-- Phase 0: ✅ tamamlandı — brute force, redis, rate limiting araştırıldı
-- Phase 1: ✅ tamamlandı — docs/research/ notları
-- Phase 2: ✅ tamamlandı — Docker + Redis kuruldu
-- Phase 3: ✅ tamamlandı — 5 modül implement edildi
-- Phase 4: ✅ tamamlandı — simülasyon testi yapıldı, loglar üretildi
-- Phase 5: ⬜ — README tamamlanacak, hoca collaborator eklenecek
+---
 
-## What I Learned
-- **Redis INCR + TTL kombinasyonunun atomik sayaç için neden ideal olduğu:** Her istekte veritabanı performansından kayıp yaşamadan hızlıca okuma/yazma işlemi yapabilmek ve eşzamanlı isteklerde yarış durumu (race condition) yaşamamak için Redis'in `INCR` (atomik artırma) ve `TTL` mekanizmaları kilit role sahiptir.
-- **Aşamalı gecikmenin UX ve güvenlik dengesini nasıl sağladığı:** Birkaç ufak denemede kullanıcıyı doğrudan engellemek yerine önce kısa bir gecikme eklemek ve ancak ciddi (ve şüpheli) denemelerde uzun cezalar/kilitler vermek, gerçek kullanıcıların (UX) mağdur olmasını engellerken otomatik botları büyük ölçüde etkisiz hale getirir.
-- **Docker multi-service kurulumunda servisler arası iletişim:** Tüm modüllerin (`app` ve `redis`) izole ağlarda sorunsuz çalışabilmesi ve `.env` dosyasıyla ortam değişkenleri üzerinden diğer servislere başarıyla bağlanabilmesi detaylıca öğrenildi.
+## Phase 0 / Faz 0: Understand Before You Build / Yazmadan Önce Anla
+
+Before writing a single line of code, I answered these questions:
+Tek satır kod yazmadan önce şu soruları yanıtladım:
+
+- What is the project? / Proje nedir?
+- How does it work? / Nasıl çalışır?
+- What are the inputs/outputs? / Girdiler/çıktılar neler?
+- What tools will I use and why? / Hangi araçları kullanacağım ve neden?
+
+---
+
+## Phase 1 / Faz 1: Research & Investigation / Araştırma ve Keşif
+
+> Folder / Klasör: `docs/research/`
+
+| Topic / Konu | Status / Durum | Notes / Notlar |
+|--------------|----------------|----------------|
+| [Topic 1] | ⬜ Not Started | |
+| [Topic 2] | ⬜ Not Started | |
+| [Topic 3] | ⬜ Not Started | |
+
+---
+
+## Phase 2 / Faz 2: Environment Setup / Ortam Kurulumu
+
+- [ ] Isolated lab environment (Docker / VM) / İzole lab ortamı
+- [ ] Tools installed and verified / Araçlar kuruldu ve test edildi
+- [ ] `.env.example` created / oluşturuldu
+
+---
+
+## Phase 3 / Faz 3: Implementation / Uygulama
+
+### Module / Modül: [Name / Ad]
+
+1. Step 1 / Adım 1 —
+2. Step 2 / Adım 2 —
+3. Step 3 / Adım 3 —
+
+---
+
+## Phase 4 / Faz 4: Testing & Reporting / Test ve Raporlama
+
+- [ ] Ran tests against target/sample / Hedef/örnek üzerinde testler çalıştırıldı
+- [ ] Documented all findings with evidence / Tüm bulgular kanıtlarıyla belgelendi
+- [ ] Wrote final report (Markdown) / Final raporu yazıldı
+
+---
+
+## Phase 5 / Faz 5: Delivery / Teslim
+
+- [ ] GitHub repository is clean and organized / Repo temiz ve düzenli
+- [ ] README.md complete / eksiksiz
+- [ ] Docker verified (`docker-compose up`) / doğrulandı
+- [ ] Instructor invited as collaborator / Danışman collaborator olarak eklendi → **keyvanarasteh**
+
+---
+
+## What I Learned / Öğrendiklerim
+
+[Honest reflection: What was hard? What surprised you? / Dürüst değerlendirme: Ne zordu? Ne sizi şaşırttı?]
